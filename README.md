@@ -13,7 +13,8 @@ To use it:
 1. Fork this repo.
 2. Create a .github folder.
 3. Copy the workflows folder into the github folder.
-4. Rename the file(s) in the .github/workflows folder to your cluster names and change the variables in those files accordingly. You can add as many as you write, but there should be a json file written in the nodes folder each of the clusters you have (this is what Aybak will write for you). The following need to be changed:
+4. Rename the file(s) in the .github/workflows folder to your cluster names and change the variables in those files accordingly. You can add as many as you write, but there should be a json file written in the nodes folder each of the clusters you have (this is what Aybak will write for you). The following need to be changed: https://github.com/mam-luk/aybak-pipelines-template/blob/master/workflows/london.yml#L7, https://github.com/mam-luk/aybak-pipelines-template/blob/master/workflows/london.yml#L23, https://github.com/mam-luk/aybak-pipelines-template/blob/master/workflows/london.yml#L30, https://github.com/mam-luk/aybak-pipelines-template/blob/master/workflows/london.yml#L31, https://github.com/mam-luk/aybak-pipelines-template/blob/master/workflows/london.yml#L32, https://github.com/mam-luk/aybak-pipelines-template/blob/master/workflows/london.yml#L40,
+https://github.com/mam-luk/aybak-pipelines-template/blob/master/workflows/london.yml#L45
 5. Deploy Aybak, and make sure you configure it to write to this git repo.
 
 ### Credits
