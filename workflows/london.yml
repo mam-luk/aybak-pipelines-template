@@ -1,0 +1,48 @@
+name: London - Build and Deploy HA Proxy Config file
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "nodes/london.json"
+  workflow_dispatch:
+    branches:
+      - "master"
+jobs:
+  create-ha-proxy-config-file:
+    runs-on: ubuntu-latest
+    container:
+      image: 'islamicnetwork/php:8.2-cli'
+    steps:
+      -
+        name: 'Check out repository code'
+        uses: actions/checkout@v3
+      -
+        name: 'Write HA Proxy Config files'
+        run: |
+          export CLUSTER="london"
+          export STATS_USERNAME=${{ secrets.HAPROXY_STATS_USERNAME}}
+          export STATS_PASSWORD=${{ secrets.HAPROXY_STATS_PASSWORD}}
+          cd .scripts && php build-haproxy-config.php &&  cd ..
+      - name: Copy HA Proxy Config file to server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          source: "tmp/london.cfg"
+          target: /home/target-path-on-your-server
+          host: server.domain.com
+          port: ${{ secrets.CI_SSH_PORT }}
+          username: ${{ secrets.CI_SSH_USER }}
+          key: ${{ secrets.CI_SSH_PRIVATE_KEY }}
+      -
+        name: Reload HA Proxy
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: server.domain.com
+          username: ${{ secrets.CI_SSH_USER }}
+          key: ${{ secrets.CI_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.CI_SSH_PORT }}
+          script: |
+            sudo cp -f /home/target-path-on-your-server/tmp/london.cfg /etc/haproxy/haproxy.cfg
+            sudo service haproxy reload
+            
+

@@ -1,0 +1,17 @@
+[
+    {
+        "Hostname": "some-node",
+        "ExternalIP": "176.58.123.456",
+        "InternalIP": "192.168.321.64"
+    },
+    {
+        "Hostname": "another-node",
+        "ExternalIP": "176.58.456.789",
+        "InternalIP": "192.168.123.456"
+    },
+    {
+        "Hostname": "yet-another-node",
+        "ExternalIP": "213.52.675.987",
+        "InternalIP": "192.168.123.456"
+    }
+]
